@@ -1,0 +1,19 @@
+# Environnements virtuels
+venv/
+env/
+
+# Cache Python / compilés
+__pycache__/
+*.pyc
+
+# Secrets & clés
+*.env
+instance/
+
+# IDE
+.vscode/
+.idea/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
