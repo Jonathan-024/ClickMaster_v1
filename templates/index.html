@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="home-hero">
+        <div class="salutation">
+            <h1>Bienvenue sur Click Master 🎮</h1>
+            <p>
+                Click Master est un jeu de réflexes et de rapidité.  
+                Cliquez sur les bonnes cases le plus vite possible, évitez les erreurs,  
+                et grimpez dans le classement mondial !
+            </p>
+        </div>
+    </section>
+
+    <section class="start-container">
+        {% if not is_authenticated %}
+        <div class="auth-buttons auth-buttons-home">
+            <a class="btn-primary" href="{{ url_for('login') }}">Connexion</a>
+            <a class="btn-secondary" href="{{ url_for('register') }}">Créer un compte</a>
+        </div>
+        {% else %}
+        <div class="start-btn-container">
+            <button id="start-btn" class="btn-primary start-btn">
+                START
+            </button>
+        </div>
+        {% endif %}
+    </section>
+
+    <section class="loaderboard-container">
+        <div class="leaderboard">
+            <h2>CLASSEMENT</h2>
+            <table class="top10-table">
+                <thead>
+                    <tr>
+                    <th>Place</th>
+                    <th>Joueur</th>
+                    <th>Score total</th>
+                    <th>Meilleur score</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <!-- Les lignes seront injectées en JS -->
+                </tbody>
+            </table>
+            <p>
+                <a href="#" onclick="alert('Page classement à venir')" class="classement-list">
+                    Voir le classement complet
+                </a>
+            </p>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+<script>
+const startBtn = document.getElementById("start-btn");
+if(startBtn){
+    startBtn.addEventListener("click", () => {
+        window.location.href = "{{ url_for('game') }}";
+    });
+}
+
+// Charger le classement depuis l'API
+fetch("{{ url_for('api_leaderboard') }}")
+  .then(res => res.json())
+  .then(data => {
+    const tbody = document.getElementById("leaderboardBody");
+    tbody.innerHTML = "";
+    data.forEach((player, index) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${player.name}</td>
+        <td>${player.totalScore}</td>
+        <td>${player.bestScore}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  })
+  .catch(err => console.error("Erreur leaderboard:", err));
+</script>
+{% endblock %}
+
+

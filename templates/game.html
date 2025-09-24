@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="progression">
+        <div class="start-info-row">
+            <div class="info-box">NIVEAU <span id="level">1</span></div>
+            <div class="info-box">FAUTES <span id="mistakes">0</span></div>
+            <div class="info-box">SCORE <span id="score">0</span></div>
+        </div>
+    </section>
+
+    <section class="game-grid-container">
+        <div class="game-grid-wrapper">
+            <div class="game-grid" id="gameGrid">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        
+            <!-- Overlay compte à rebours -->
+            <div id="countdownOverlay" class="countdown-overlay">
+                <span id="countdownText">3</span>
+            </div>
+
+            <div class="pause-overlay" id="pauseOverlay">
+                <div class="pause-overlay-content">
+                    <p>Jeu en pause</p>
+                    <button id="resumeBtn" class="action-btn-pause">Reprendre</button>
+                    <button id="quitFromPauseBtn" class="action-btn-pause" data-home="{{ url_for('index') }}">Quitter</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="game-options" style="display:none;" id="gameOverSection">
+        <div class="modal" id="gameOverModal">
+            <div class="modal-content">
+                <h2>Fin de partie !</h2>
+                <p>Vous avez atteint le nombre maximal de fautes</p>
+                <p>Votre score : <span id="finalScore">0</span></p>
+                <p>Score total : <span id="finalTotalScore">0</span></p>
+                <p>Meilleur score : <span id="finalBestScore">0</span></p>
+                <div class="modal-buttons">
+                    <a href="{{ url_for('game') }}" class="btn-link">Rejouer</a>
+                    <a href="{{ url_for('index') }}" class="btn-link">Retour à l'accueil</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="start-info-row">
+        <div class="info-box info-box-pieces">PIÈCES <span id="coins">0</span></div>
+    </section>
+
+    <section class="game-gestion-bloc">
+        <div class="start-actions-row">
+            <button id="pause-btn" class="action-btn">Pause</button>
+            <button id="stop-btn" class="action-btn" data-home="{{ url_for('index') }}">Quitter</button>
+        </div>
+    </section>
+
+    <section class="game-color-box">
+        <div class="level-color-box" id="levelColorBox"></div>
+    </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Click Master</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS global -->
+  <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+  <!-- CSS spécifique à la page -->
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="{{ body_class|default('') }}">
+  {% block top_nav %}
+  <header class="cm-header">
+    <nav class="cm-nav">
+      <div class="cm-left">
+        {% if is_authenticated %}
+        <button class="cm-left-toggle" id="leftMenuToggle" aria-label="Open left menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <polygon points="6,4 20,12 6,20" fill="currentColor"></polygon>
+          </svg>
+        </button>
+        {% endif %}
+
+        <div class="cm-brand">
+          {% if is_start_page %}
+            <span class="cm-title">Click Master</span>
+          {% else %}
+            <a class="cm-title" href="{{ url_for('index') }}">Click Master</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="cm-right">
+        <a class="cm-icon-btn" href="#" id="notifyBtn" aria-label="Notifications">
+          <!-- Icône de cloche stylée -->
+          <svg width="24" height="24" viewBox="0 2.5 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+            <!-- Corps de la cloche -->
+            <path d="M18 16V11C18 7.686 15.314 5 12 5C8.686 5 6 7.686 6 11V16L4 18V19H20V18L18 16Z"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Battant de la cloche -->
+            <path d="M13.73 21C13.374 21.597 12.709 22 12 22C11.291 22 10.626 21.597 10.27 21"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+        <div class="cm-user-menu">
+          <button class="cm-icon-btn" id="userMenuBtn" aria-haspopup="true" aria-expanded="false" aria-label="User menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="11" stroke="currentColor" fill="none"/>
+              <circle cx="12" cy="9" r="3" fill="currentColor"/>
+              <path d="M6 18c1.5-2.5 4-4 6-4s4.5 1.5 6 4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </button>
+          <div class="cm-user-dropdown" id="userDropdown" role="menu" aria-hidden="true">
+            <a href="{{ url_for('index') }}" class="cm-dropdown-item">Accueil</a>
+            {% if is_authenticated %}
+            <a href="#" class="cm-dropdown-item">Compte</a>
+            <a href="#" class="cm-dropdown-item">Paramètres</a>
+            {% endif %}
+            <a href="#" class="cm-dropdown-item">Aide</a>
+            <a href="#" class="cm-dropdown-item">A propos</a>
+            {% if is_authenticated %}
+            <form action="{{ url_for('logout') }}" method="get">
+              <button type="submit" class="cm-dropdown-btn cm-logout">Déconnexion</button>
+            </form>
+            {% else %}
+            <div class="cm-dropdown-actions">
+              <a class="cm-dropdown-btn cm-primary" href="{{ url_for('login') }}">Connexion</a>
+              <a class="cm-dropdown-btn" href="{{ url_for('register') }}">Créer un compte</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    {% if is_authenticated %}
+    <aside class="cm-left-drawer" id="leftDrawer" aria-hidden="true">
+      <div class="cm-drawer-content">
+        <div class="cm-drawer-item">
+          Score total : {{ current_user.totalScore if is_authenticated else 0 }}
+        </div>
+        <div class="cm-drawer-item">
+          Meilleur score : {{ current_user.bestScore if is_authenticated else 0 }}
+        </div>
+        <div class="cm-drawer-item">Pièces : <span id="coins">0</span></div>
+        <hr class="cm-drawer-separator">
+        <a href="#" class="cm-drawer-item" title="Bientôt disponible" onclick="event.preventDefault(); alert('Bientôt disponible')">Market</a>
+        <a href="#" class="cm-drawer-item" title="Bientôt disponible" onclick="event.preventDefault(); alert('Bientôt disponible')">Défis</a>
+        <a href="#" class="cm-drawer-item" title="Bientôt disponible" onclick="event.preventDefault(); alert('Bientôt disponible')">Cashs</a>
+        <hr class="cm-drawer-separator">
+        <a href="#" class="cm-drawer-item">Premium</a>
+      </div>
+    </aside>
+    {% endif %}
+  </header>
+  {% endblock %}
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main class="cm-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- JS global -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script>
+    window.currentUserName = "{{ current_user.username if is_authenticated else '' }}";
+  </script>
+
+  <!-- JS spécifique à la page -->
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

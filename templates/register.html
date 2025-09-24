@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-form">
+  <h2>Créer un compte</h2>
+  <form method="POST" action="{{ url_for('register') }}">
+    <label for="username" class="auth-form-champ">Nom d'utilisateur</label>
+    <input type="text" id="username" class="auth-form-input" name="username" required>
+
+    <label for="email" class="auth-form-champ">Adresse email</label>
+    <input type="email" id="email" class="auth-form-input" name="email" required>
+
+    <label for="password" class="auth-form-champ">Mot de passe</label>
+    <input type="password" id="password" class="auth-form-input" name="password" required>
+
+    <div class="show-password">
+      <input type="checkbox" id="togglePasswordRegister">
+      <label for="togglePasswordRegister">Afficher le mot de passe</label>
+    </div>
+
+    <label for="confirm_password" class="auth-form-champ">Confirmer le mot de passe</label>
+    <input type="password" id="confirm_password" class="auth-form-input" name="confirm_password" required>
+
+    <div class="show-password">
+      <input type="checkbox" id="toggleConfirmPassword">
+      <label for="toggleConfirmPassword">Afficher le mot de passe</label>
+    </div>
+
+    <button type="submit">S'inscrire</button>
+  </form>
+
+  <p style="margin-top: 12px; text-align: center;">
+    Déjà un compte ? <a href="{{ url_for('login') }}">Connectez-vous</a>
+  </p>
+</div>
+{% endblock %}

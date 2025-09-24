@@ -1,0 +1,221 @@
+.home-hero {
+  background: linear-gradient(135deg, #141a33, #0f1530 60%, #0d1226 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+.home-hero h1 { font-size: 28px; margin: 0 0 10px; }
+.home-hero p { color: var(--muted); margin: 0 0 18px; }
+
+.auth-buttons {
+  text-align: center;
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.btn-primary, .btn-secondary {
+  display: inline-block;
+  padding: 10px 20px 13px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .1s ease, box-shadow .2s ease;
+}
+
+.btn-primary {
+  background: var(--accent-2);
+  color: #062617;
+  box-shadow: 0 6px 20px rgba(61,220,151,0.25);
+}
+.btn-primary:hover { transform: translateY(-2px); }
+
+.btn-secondary {
+  background: var(--accent);
+  color: #0a0c1a;
+  box-shadow: 0 6px 20px rgba(108,140,255,0.25);
+}
+.btn-secondary:hover { transform: translateY(-2px); }
+
+.auth-buttons-home {
+  margin-top: 0.2rem;
+  margin-bottom: -0.6rem;
+}
+
+.start-container {
+  text-align: center;
+  margin: 10px 0;
+  padding: 20px 15px 15px;
+  border: none;
+}
+
+.start-btn-container {
+  text-align: center;
+  margin: 0.2rem 0 -0.6rem;
+  padding: 20px 15px 15px;
+  border: none;
+}
+
+.start-btn-container button { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  padding: 10px, 12px, 12px; background: var(--accent-3); color: #0a0c1a; 
+  font-weight: 900; border: none; border-radius: 4px; cursor: pointer; 
+  transition: background .15s ease; font-size: 1.1rem;}
+.start-btn-container button:hover { background: #5b79ff; }
+
+/* === LEADERBOARD STYLES === */
+.leaderboard-section {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 6px 20px var(--shadow);
+}
+
+.leaderboard-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+#leaderboard ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#leaderboard li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#leaderboard li:hover {
+  transform: translateY(-2px);
+  background: var(--surface-hover, #1e1e1e);
+}
+
+#leaderboard .rank {
+  font-weight: 700;
+  margin-right: 12px;
+  color: var(--muted);
+}
+
+#leaderboard .name {
+  flex: 1;
+  font-weight: 600;
+  color: var(--text);
+}
+
+#leaderboard .score {
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+/* Styles spéciaux pour le podium */
+#leaderboard li:nth-child(1) {
+  background: linear-gradient(90deg, #ffd700, #ffec8b);
+  color: #000;
+}
+#leaderboard li:nth-child(1) .score {
+  color: #000;
+}
+
+#leaderboard li:nth-child(2) {
+  background: linear-gradient(90deg, #c0c0c0, #e0e0e0);
+  color: #000;
+}
+#leaderboard li:nth-child(2) .score {
+  color: #000;
+}
+
+#leaderboard li:nth-child(3) {
+  background: linear-gradient(90deg, #cd7f32, #e6b98b);
+  color: #000;
+}
+#leaderboard li:nth-child(3) .score {
+  color: #000;
+}
+
+.leaderboard {
+  text-align: center;
+  margin: 32px auto;
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #ccc);
+  border-radius: 12px;
+  padding: 16px 16px 5px;
+}
+
+.leaderboard h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text, #0a0c1a);
+}
+
+.top10-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.top10-table th, .top10-table td {
+  /* width: calc(100% / 3); */
+  text-align: start;
+  border: 1px solid var(--border);
+  padding: 8px;
+}
+
+.top10-table th:nth-child(1),
+.top10-table td:nth-child(1) {
+  width: 10%;
+}
+
+.top10-table th:nth-child(3),
+.top10-table td:nth-child(3) {
+  width: 25%;
+}
+
+.top10-table th:nth-child(4),
+.top10-table td:nth-child(4) {
+  width: 25%;
+}
+
+.top10-table th {
+  background: var(--surface);
+  color: var(--accent);
+}
+
+.top10-table td {
+  background: var(--bg);
+}
+
+.classement-list {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.classement-list:hover {
+  color: var(--accent-2);  
+}
+
+.classement-list:active {
+  color: var(--accent);  
+}
+
+.classement-list:focus {
+  outline: none;           /* supprime le halo bleu */
+  box-shadow: none;        /* supprime d'autres styles de focus */
+}

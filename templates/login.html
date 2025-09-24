@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-form">
+  <h2>Connexion</h2>
+  <form method="POST" action="{{ url_for('login') }}">
+    <label for="username" class="auth-form-champ">Nom d'utilisateur</label>
+    <input type="text" id="username" class="auth-form-input" name="username" required>
+
+    <label for="password" class="auth-form-champ">Mot de passe</label>
+    <input type="password" id="password" class="auth-form-input" name="password" required>
+
+    <div class="show-password">
+      <input type="checkbox" id="togglePasswordLogin">
+      <label for="togglePasswordLogin">Afficher le mot de passe</label>
+    </div>
+
+    <button type="submit">Se connecter</button>
+  </form>
+
+  <p style="margin-top: 12px; text-align: center;">
+    <a href="{{ url_for('forgot_password') }}">Mot de passe oublié ?</a>
+  </p>
+  <p style="margin-top: 6px; text-align: center;">
+    Pas encore de compte ? <a href="{{ url_for('register') }}">Inscrivez-vous</a>
+  </p>
+</div>
+{% endblock %}
